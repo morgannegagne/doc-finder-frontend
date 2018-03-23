@@ -1,4 +1,5 @@
 import React from 'react'
+import SearchBar from './components/SearchBar'
 
 export default class Home extends React.Component {
 
@@ -6,7 +7,8 @@ export default class Home extends React.Component {
     doctors: [],
     latitude: 40.7047751,
     longitude: -74.013277,
-    input: ''
+    location: '',
+    insurance: ''
   }
 
   setPosition = (position) => {
@@ -29,8 +31,7 @@ export default class Home extends React.Component {
       .then(doctors => this.setState({doctors}))
   }
 
-  clicked = (e) => {
-    e.preventDefault();
+  fetchGooglePosition = () => {
     let options = {
       method: "POST",
       headers: {
@@ -38,28 +39,31 @@ export default class Home extends React.Component {
         accept: "application/json"
       },
       body: JSON.stringify({
-        "location": this.state.input
+        "location": this.state.location
       })
     }
-    console.log(options)
     fetch('http://localhost:3000/api/v1/google', options)
       .then(res => res.json())
-      .then(json => console.log(json))
+      .then(json => this.setState({
+        longitude: json.lng,
+        latitude: json.lat
+      }, () => {
+        this.fetchDoctors()
+      }))
   }
 
-  handleChange = (e) => {
-    this.setState({
-      input: e.target.value
+  handleSearch = (values) => {
+    this.setState(values, () => {
+      this.fetchGooglePosition()
     })
   }
 
   render(){
+    console.log(this.state)
     return(
       <div>
-        <form>
-          <input type="text" onChange={this.handleChange}/>
-          <button onClick={this.clicked}>Submit</button>
-        </form>
+        <h1>DOC FINDER</h1>
+        < SearchBar onSearch={this.handleSearch}/>
       </div>
     )
   }
