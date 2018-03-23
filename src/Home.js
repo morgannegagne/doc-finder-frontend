@@ -31,7 +31,7 @@ export default class Home extends React.Component {
       .then(doctors => this.setState({doctors}))
   }
 
-  fetchGooglePosition = () => {
+  searchWithGoogleCoordinates = () => {
     let options = {
       method: "POST",
       headers: {
@@ -54,7 +54,11 @@ export default class Home extends React.Component {
 
   handleSearch = (values) => {
     this.setState(values, () => {
-      this.fetchGooglePosition()
+      if (this.state.location === "Current Location"){
+        this.getLocation()
+      } else {
+        this.searchWithGoogleCoordinates()
+      }
     })
   }
 

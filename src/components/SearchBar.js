@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input, Menu } from 'semantic-ui-react'
+import { Input, Menu, Icon } from 'semantic-ui-react'
 
 export default class SearchBar extends React.Component {
 
@@ -19,17 +19,24 @@ export default class SearchBar extends React.Component {
     this.props.onSearch(this.state)
   }
 
+  useCurrentLocation = (e) => {
+    e.preventDefault()
+    this.setState({location: "Current Location"})
+  }
+
   render() {
+    const inputStyle={'padding':4, 'width': 300}
     return (
       <div>
         <Menu borderless>
-          <Menu.Menu position="right">
+          <Menu.Menu >
             <Menu.Item>
               <form onSubmit={this.handleSubmit}>
-                <Input size="large" style={{'padding':4, 'width': 300}} onChange={this.handleInputChange} value={this.state.specialty} name="specialty" placeholder='Specialty' />
-                <Input size="large" style={{'padding':4, 'width': 300}} onChange={this.handleInputChange} value={this.state.location} name="location" placeholder='Location' />
-                <Input size="large" style={{'padding':4, 'width': 300}} onChange={this.handleInputChange} value={this.state.insurance} name="insurance" placeholder='Insurance' />
-                <Input size="large" style={{'padding':4}} type="submit" icon="search" placeholder="search"/>
+                <Input size="large" style={inputStyle} onChange={this.handleInputChange} value={this.state.specialty} name="specialty" placeholder='Specialty' />
+                <Input size="large" style={inputStyle} onChange={this.handleInputChange} value={this.state.location} name="location" placeholder='Location' />
+                <Icon  size="big" link onClick={this.useCurrentLocation}  name="point" />
+                <Input size="large" style={inputStyle} onChange={this.handleInputChange} value={this.state.insurance} name="insurance" placeholder='Insurance' />
+                <button className="ui icon button" onClick={this.handleSubmit}><i className="search icon"></i></button>
               </form>
             </Menu.Item>
             <Menu.Item>Advanced Search</Menu.Item>
