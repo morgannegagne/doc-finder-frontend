@@ -8,12 +8,24 @@ export default class Home extends React.Component {
     latitude: 40.7047751,
     longitude: -74.013277,
     location: '',
-    insurance: ''
+    insuranceList: []
+  }
+
+  componentDidMount(){
+    this.fetchInsurances()
+  }
+
+
+  fetchInsurances(){
+    fetch('http://Localhost:3000/api/v1/doctor_database/insurances')
+      .then(res => res.json())
+      .then(json => this.setState({
+        insuranceList: json.data
+      }))
   }
 
   setPosition = (position) => {
-    console.log(position);
-      this.setState({latitude: position.coords.longitude, longitude: position.coords.latitude}, this.fetchDoctors)
+    this.setState({latitude: position.coords.latitude, longitude: position.coords.longitude}, this.fetchDoctors)
   }
 
   getLocation() {
@@ -26,7 +38,7 @@ export default class Home extends React.Component {
   }
 
   fetchDoctors = () => {
-    fetch(`http://Localhost:3000/api/v1/doctor_database?longitude=${this.state.longitude}&latitude=${this.state.latitude}`)
+    fetch(`http://Localhost:3000/api/v1/doctor_database/doctors?longitude=${this.state.longitude}&latitude=${this.state.latitude}`)
       .then(res => res.json())
       .then(doctors => this.setState({doctors}))
   }
@@ -67,7 +79,7 @@ export default class Home extends React.Component {
     return(
       <div>
         <h1>DOC FINDER</h1>
-        < SearchBar onSearch={this.handleSearch}/>
+        < SearchBar onSearch={this.handleSearch} insuranceList={this.state.insuranceList}/>
       </div>
     )
   }
