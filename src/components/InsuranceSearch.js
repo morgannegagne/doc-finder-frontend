@@ -1,3 +1,5 @@
+// CAN LIKELY DELETE FILE BEFORE DEPLOYMENT
+
 import React from 'react'
 import { Search } from 'semantic-ui-react'
 

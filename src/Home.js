@@ -1,5 +1,7 @@
 import React from 'react'
 import SearchBar from './components/SearchBar'
+import Filters from './components/Filters'
+import { Icon } from 'semantic-ui-react'
 
 export default class Home extends React.Component {
 
@@ -8,7 +10,11 @@ export default class Home extends React.Component {
     latitude: 40.7047751,
     longitude: -74.013277,
     location: '',
-    insuranceList: []
+    insuranceList: [],
+    keyword: '',
+    showMoreOptions: false,
+    distance: 10,
+    gender: ''
   }
 
   componentDidMount(){
@@ -38,7 +44,7 @@ export default class Home extends React.Component {
   }
 
   fetchDoctors = () => {
-    fetch(`http://Localhost:3000/api/v1/doctor_database/doctors?longitude=${this.state.longitude}&latitude=${this.state.latitude}`)
+    fetch(`http://Localhost:3000/api/v1/doctor_database/doctors?q=${this.state.keyword}&longitude=${this.state.longitude}&latitude=${this.state.latitude}`)
       .then(res => res.json())
       .then(doctors => this.setState({doctors}))
   }
@@ -74,12 +80,24 @@ export default class Home extends React.Component {
     })
   }
 
+  handleOptionsClick = () => (this.setState({showMoreOptions: !this.state.showMoreOptions}))
+
+  handleSliderChange = (distance) => (this.setState({ distance }))
+
+  handleGenderChange = (gender) => (this.setState({ gender }))
+
   render(){
     console.log(this.state)
     return(
       <div>
         <h1>DOC FINDER</h1>
         < SearchBar onSearch={this.handleSearch} insuranceList={this.state.insuranceList}/>
+        <div className="dividing header" style={{paddingLeft: 15}} >
+            {this.state.showMoreOptions ?
+              (<div>Less Options: <Icon onClick={this.handleOptionsClick} className='big' link name="minus"/> < Filters changeDistanceValue={this.handleSliderChange} changeGender={this.handleGenderChange} /> </div> ) :
+              (<div>More Options:<Icon onClick={this.handleOptionsClick} className='big' link name="plus"/></div>)
+            }
+        </div>
       </div>
     )
   }

@@ -1,15 +1,12 @@
 import React from 'react'
-import { Form, Input, Grid, Icon, Search, Dropdown } from 'semantic-ui-react'
-import InsuranceSearch from './InsuranceSearch'
+import { Form, Input, Grid, Icon, Dropdown } from 'semantic-ui-react'
 
 export default class SearchBar extends React.Component {
 
   state = {
     location: '',
     insurance: '',
-    specialty: '',
-    insuranceResults: [],
-    isLoading: false
+    specialty: ''
   }
 
   handleInputChange = (e) => {
@@ -32,7 +29,7 @@ export default class SearchBar extends React.Component {
 
   createInsuranceOptions = () => {
     let options = this.props.insuranceList.map(i => {
-      return {key: i.uid, value: i.name, text: i.name, value: i.name}
+      return { key: i.uid, value: i.name, text: i.name }
     })
     options.unshift({key: 'none', value: '', text: ''})
     return options
@@ -44,19 +41,15 @@ export default class SearchBar extends React.Component {
     const options = this.createInsuranceOptions()
     return (
       <Grid>
-        <Grid.Row padded centered>
+        <Grid.Row centered>
           <Grid.Column width={5}>
               <Form onSubmit={this.handleSubmit} >
-                <Form.Group inline fluid>
-                  <Form.Field inline >
-                    <Input style={{'padding-left': 5, 'width': 400}} size="large" onChange={this.handleInputChange} value={this.state.keyword} name="keyword" placeholder='Search for condition, procedure, physician...' />
-                  </Form.Field>
-                </Form.Group>
+                  <Input style={{'paddingLeft': 5, 'width': 400}} size="large" onChange={this.handleInputChange} value={this.state.keyword} name="keyword" placeholder='Search for condition, procedure, physician...' />
               </Form>
           </ Grid.Column >
           <Grid.Column width={5}>
               <Form onSubmit={this.handleSubmit} >
-                <Form.Group inline fluid>
+                <Form.Group inline>
                   <Form.Field inline >
                     <label><Icon className="link big" name='point' onClick={this.useCurrentLocation}/></label>
                     <Input size="large" style={{'width': 320}} onChange={this.handleInputChange} value={this.state.location} name="location" placeholder='Location' />
