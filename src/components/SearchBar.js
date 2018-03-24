@@ -41,17 +41,25 @@ export default class SearchBar extends React.Component {
   handleSelectInsurance = (e, { value }) => this.setState({ insurance: value })
 
   render() {
-    const inputStyle={'padding':2, 'width': 350}
     const options = this.createInsuranceOptions()
     return (
       <Grid>
         <Grid.Row padded centered>
           <Grid.Column width={5}>
               <Form onSubmit={this.handleSubmit} >
-                <Form.Group inline>
-                  <Form.Field inline width={16}>
+                <Form.Group inline fluid>
+                  <Form.Field inline >
+                    <Input style={{'padding-left': 5, 'width': 400}} size="large" onChange={this.handleInputChange} value={this.state.keyword} name="keyword" placeholder='Search for condition, procedure, physician...' />
+                  </Form.Field>
+                </Form.Group>
+              </Form>
+          </ Grid.Column >
+          <Grid.Column width={5}>
+              <Form onSubmit={this.handleSubmit} >
+                <Form.Group inline fluid>
+                  <Form.Field inline >
                     <label><Icon className="link big" name='point' onClick={this.useCurrentLocation}/></label>
-                    <Input size="large" onChange={this.handleInputChange} value={this.state.location} name="location" placeholder='Location' />
+                    <Input size="large" style={{'width': 320}} onChange={this.handleInputChange} value={this.state.location} name="location" placeholder='Location' />
                   </Form.Field>
                 </Form.Group>
               </Form>
