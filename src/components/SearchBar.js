@@ -1,5 +1,6 @@
 import React from 'react'
-import { Input, Menu, Icon, Search } from 'semantic-ui-react'
+import { Form, Input, Grid, Icon, Search, Dropdown } from 'semantic-ui-react'
+import InsuranceSearch from './InsuranceSearch'
 
 export default class SearchBar extends React.Component {
 
@@ -7,7 +8,8 @@ export default class SearchBar extends React.Component {
     location: '',
     insurance: '',
     specialty: '',
-    insuranceResults: []
+    insuranceResults: [],
+    isLoading: false
   }
 
   handleInputChange = (e) => {
@@ -28,48 +30,40 @@ export default class SearchBar extends React.Component {
     this.setState({location: "Current Location"})
   }
 
-  handleInsuranceSelect = () => {
-
-  }
-
-  filterInsurances = () => {
-    return this.props.insuranceList.filter(i => {
-      return i.name.toLowerCase().includes(this.state.insurance.toLowerCase())
+  createInsuranceOptions = () => {
+    let options = this.props.insuranceList.map(i => {
+      return {key: i.uid, value: i.name, text: i.name, value: i.name}
     })
+    options.unshift({key: 'none', value: '', text: ''})
+    return options
   }
 
-  handleSearchChange = (e) => {
-    this.setState({
-      insurance: e.target.value
-    }, () => {
-      console.log(this.state.insurance)
-      let filtered = this.filterInsurances().map(r => r.name)
-      console.log(filtered)
-      this.setState({
-        insuranceResults: filtered
-      })
-    })
-  }
+  handleSelectInsurance = (e, { value }) => this.setState({ insurance: value })
 
   render() {
-    const inputStyle={'padding':2, 'width': 400}
+    const inputStyle={'padding':2, 'width': 350}
+    const options = this.createInsuranceOptions()
     return (
-      <div>
-        <Menu borderless>
-          <Menu.Menu >
-            <Menu.Item>
-              <form onSubmit={this.handleSubmit}>
-                <Input size="large" style={inputStyle} onChange={this.handleInputChange} value={this.state.specialty} name="specialty" placeholder='Specialty' />
-                <Input size="large" style={inputStyle} onChange={this.handleInputChange} value={this.state.location} name="location" placeholder='Location' />
-                <Icon  size="big" link onClick={this.useCurrentLocation} name="point" />
-                <Input size="large" style={inputStyle} onChange={this.handleInputChange} value={this.state.insurance} name="insurance" placeholder='Insurance' />
-                <button className="ui icon button" onClick={this.handleSubmit}><i className="search icon"></i></button>
-              </form>
-            </Menu.Item>
-            <Menu.Item>Advanced Search</Menu.Item>
-          </Menu.Menu>
-        </Menu>
-      </div>
+      <Grid>
+        <Grid.Row padded centered>
+          <Grid.Column width={5}>
+              <Form onSubmit={this.handleSubmit} >
+                <Form.Group inline>
+                  <Form.Field inline width={16}>
+                    <label><Icon className="link big" name='point' onClick={this.useCurrentLocation}/></label>
+                    <Input size="large" onChange={this.handleInputChange} value={this.state.location} name="location" placeholder='Location' />
+                  </Form.Field>
+                </Form.Group>
+              </Form>
+          </ Grid.Column >
+          <Grid.Column width={5} >
+              <Dropdown onChange={this.handleSelectInsurance} className="large" placeholder='Select insurance' search selection fluid options={options} />
+          </Grid.Column>
+          <Grid.Column width={1}>
+            <button className="ui icon button big" onClick={this.handleSubmit}><i className="search icon"></i></button>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     )
   }
 }
