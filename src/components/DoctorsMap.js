@@ -28,10 +28,10 @@ const DoctorsMap = compose(
   withScriptjs,
   withGoogleMap
 )(props => {
-  const markers = props.markers.map(m => (
+  const markers = props.doctors.map(m => (
     <Marker
       key={m}
-      position={m}
+      position={m.closestPractice}
       onClick={props.onToggleOpen}
       >
       {props.isOpen && <InfoBox

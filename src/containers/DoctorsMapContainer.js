@@ -26,15 +26,15 @@ export default class DoctorsMapContainer extends React.Component {
 					closestPractice = practice
 				}
 			})
-			return { lat: closestPractice.lat, lng: closestPractice.lon }
+			return Object.assign(doctor, { closestPractice: {lat: closestPractice.lat, lng: closestPractice.lon }})
 		});
 	};
 
 	render() {
-		const markers = this.findClosestPractice()
+		const doctors = this.findClosestPractice()
 		return (
 			<div>
-				<DoctorsMap markers={markers} location={this.state.location} />
+				<DoctorsMap doctors={doctors} location={this.state.location} />
 			</div>
 		);
 	}
