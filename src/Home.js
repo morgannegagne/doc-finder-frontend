@@ -4,6 +4,8 @@ import Filters from "./components/Filters";
 import { Icon, Grid } from "semantic-ui-react";
 import DoctorsContainer from "./containers/DoctorsContainer";
 import DoctorsMapContainer from "./containers/DoctorsMapContainer"
+import DoctorPage from "./components/DoctorPage"
+
 
 export default class Home extends React.Component {
 	state = {
@@ -149,19 +151,23 @@ export default class Home extends React.Component {
 						</div>
 					)}
 				</div>
-				{this.state.doctors.length ? (
-					<DoctorsContainer
-						doctors={this.state.doctors}
-						insurance={this.state.insurance}
-						distance={this.state.distance}
-						gender={this.state.gender}
-					/>
-				) : null}
-				<Grid>
-					<Grid.Row centered>
-						< DoctorsMapContainer doctors={this.state.doctors} location={ {lat: this.state.latitude, lng: this.state.longitude} }/>
-					</Grid.Row>
-				</Grid>
+					{this.state.doctors.length ? (
+						<Grid>
+							<Grid.Row>
+								<Grid.Column width={8} floated="right" >
+									< DoctorsMapContainer doctors={this.state.doctors} location={ {lat: this.state.latitude, lng: this.state.longitude} }/>
+								</Grid.Column>
+								<Grid.Column width={8}>
+									<DoctorsContainer
+										doctors={this.state.doctors}
+										insurance={this.state.insurance}
+										distance={this.state.distance}
+										gender={this.state.gender}
+									/>
+								</Grid.Column>
+							</Grid.Row>
+						</Grid>
+					) : null}
 			</div>
 		);
 	}

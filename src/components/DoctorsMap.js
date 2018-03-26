@@ -8,7 +8,7 @@ const DoctorsMap = withScriptjs(withGoogleMap((props) =>
     defaultZoom={14}
     center={ props.location }
   >
-    {props.doctors.map(doctor => <DoctorMarker doctor={doctor} location={doctor.closestPractice} />)}
+    {props.doctors.map(doctor => <DoctorMarker doctor={doctor} location={{lat: doctor.closestPractice.lat, lng: doctor.closestPractice.lon}} />)}
   </GoogleMap>
 
 ))

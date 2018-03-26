@@ -4,7 +4,6 @@ import DoctorsMap from "../components/DoctorsMap";
 export default class DoctorsMapContainer extends React.Component {
 
 	state = {
-		markers: [],
 		doctors: [],
 		location: this.props.location
 	}
@@ -26,7 +25,7 @@ export default class DoctorsMapContainer extends React.Component {
 					closestPractice = practice
 				}
 			})
-			return Object.assign(doctor, { closestPractice: {lat: closestPractice.lat, lng: closestPractice.lon }})
+			return Object.assign(doctor, { closestPractice })
 		});
 	};
 
@@ -39,7 +38,7 @@ export default class DoctorsMapContainer extends React.Component {
 					location={this.state.location}
 					googleMapURL={"https://maps.googleapis.com/maps/api/js?key=AIzaSyBO37tWXY7797JXJmFXstlFy4J6rSMcu68&v=3.exp&libraries=geometry,drawing,places"}
 					loadingElement={<div style={{ height: `100%` }} />}
-					containerElement={<div style={{ height: `600px`, width: `600px` }} />}
+					containerElement={<div style={{ height: `600px`, width: `100%` }} />}
 					mapElement={<div style={{ height: `80%` }} />}
 					doctors={doctors}
 				/>

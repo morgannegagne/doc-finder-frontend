@@ -9,7 +9,6 @@ export default class DoctorMarker extends React.Component {
   }
 
   toggleOpen = () => {
-    console.log('click')
     this.setState({isOpen: !this.state.isOpen})
   }
 
