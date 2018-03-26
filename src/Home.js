@@ -14,7 +14,8 @@ export default class Home extends React.Component {
     keyword: '',
     showMoreOptions: false,
     distance: 10,
-    gender: ''
+    gender: '',
+    insurance: ''
   }
 
   componentDidMount(){
@@ -86,12 +87,14 @@ export default class Home extends React.Component {
 
   handleGenderChange = (gender) => (this.setState({ gender }))
 
+  handleInsuranceChange = (insurance) => (this.setState({ insurance }))
+
   render(){
     console.log(this.state)
     return(
       <div>
         <h1>DOC FINDER</h1>
-        < SearchBar onSearch={this.handleSearch} insuranceList={this.state.insuranceList}/>
+        < SearchBar onSearch={this.handleSearch} insuranceList={this.state.insuranceList} changeInsurance={this.handleInsuranceChange} />
         <div className="dividing header" style={{paddingLeft: 15}} >
             {this.state.showMoreOptions ?
               (<div>Less Options: <Icon onClick={this.handleOptionsClick} className='big' link name="minus"/> < Filters changeDistanceValue={this.handleSliderChange} changeGender={this.handleGenderChange} /> </div> ) :

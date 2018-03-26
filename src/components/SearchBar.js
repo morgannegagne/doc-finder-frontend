@@ -35,7 +35,9 @@ export default class SearchBar extends React.Component {
     return options
   }
 
-  handleSelectInsurance = (e, { value }) => this.setState({ insurance: value })
+  handleSelectInsurance = (e, { value }) => {
+    this.props.changeInsurance(value)
+  }
 
   render() {
     const options = this.createInsuranceOptions()
