@@ -1,8 +1,9 @@
 import React from "react";
 import SearchBar from "./components/SearchBar";
 import Filters from "./components/Filters";
-import { Icon } from "semantic-ui-react";
+import { Icon, Grid } from "semantic-ui-react";
 import DoctorsContainer from "./containers/DoctorsContainer";
+import DoctorsMapContainer from "./containers/DoctorsMapContainer"
 
 export default class Home extends React.Component {
 	state = {
@@ -98,7 +99,6 @@ export default class Home extends React.Component {
 	handleInsuranceChange = insurance => this.setState({ insurance });
 
 	render() {
-		console.log(this.state);
 		return (
 			<div>
 				<h1>DOC FINDER</h1>
@@ -136,6 +136,11 @@ export default class Home extends React.Component {
 				{this.state.doctors.length ? (
 					<DoctorsContainer doctors={this.state.doctors} />
 				) : null}
+				<Grid>
+					<Grid.Row centered>
+						< DoctorsMapContainer doctors={this.state.doctors} location={ {lat: this.state.latitude, lng: this.state.longitude} }/>
+					</Grid.Row>
+				</Grid>
 			</div>
 		);
 	}
