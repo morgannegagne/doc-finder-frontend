@@ -81,13 +81,13 @@ export default class DoctorPage extends React.Component {
 				}
 				i++;
 			}
-			return insurances.map(insurance => <Label content={insurance} />);
+			let sortedInsurance = insurances.sort();
+			return sortedInsurance.map(insurance => <Label content={insurance} />);
 		}
 	};
 
 	render() {
 		this.findClosestPractice();
-		console.log(this.props.dr);
 		return (
 			<div>
 				<Grid celled>

@@ -43,6 +43,15 @@ export default class Home extends React.Component {
 		);
 	};
 
+	getLocation() {
+		if (navigator.geolocation) {
+			console.log("getting position");
+			navigator.geolocation.getCurrentPosition(this.setPosition);
+		} else {
+			console.log("Geolocation is not supported by this browser.");
+		}
+	}
+
 	fetchDoctors = () => {
 		fetch(
 			`http://Localhost:3000/api/v1/doctor_database/doctors?q=${
@@ -80,13 +89,20 @@ export default class Home extends React.Component {
 	};
 
 	handleSearch = values => {
-		this.setState(values, () => {
-			if (this.state.location === "Current Location") {
-				this.getLocation();
-			} else {
-				this.searchWithGoogleCoordinates();
+		this.setState(
+			{
+				location: values.location,
+				insurance: values.insurance,
+				keyword: values.keyword
+			},
+			() => {
+				if (this.state.location === "Current Location") {
+					this.getLocation();
+				} else {
+					this.searchWithGoogleCoordinates();
+				}
 			}
-		});
+		);
 	};
 
 	handleOptionsClick = () =>
@@ -134,7 +150,12 @@ export default class Home extends React.Component {
 					)}
 				</div>
 				{this.state.doctors.length ? (
-					<DoctorsContainer doctors={this.state.doctors} />
+					<DoctorsContainer
+						doctors={this.state.doctors}
+						insurance={this.state.insurance}
+						distance={this.state.distance}
+						gender={this.state.gender}
+					/>
 				) : null}
 				<Grid>
 					<Grid.Row centered>

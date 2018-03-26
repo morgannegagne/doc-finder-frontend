@@ -45,7 +45,8 @@ export default class DoctorCard extends React.Component {
 				}
 				i++;
 			}
-			return insurances.map(insurance => <Label content={insurance} />);
+			let sortedInsurance = insurances.sort();
+			return sortedInsurance.map(insurance => <Label content={insurance} />);
 		}
 	};
 
