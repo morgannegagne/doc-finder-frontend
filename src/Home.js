@@ -1,4 +1,7 @@
 import React from 'react'
+import SearchBar from './components/SearchBar'
+import Filters from './components/Filters'
+import { Icon } from 'semantic-ui-react'
 
 export default class Home extends React.Component {
 
@@ -6,12 +9,30 @@ export default class Home extends React.Component {
     doctors: [],
     latitude: 40.7047751,
     longitude: -74.013277,
-    input: ''
+    location: '',
+    insuranceList: [],
+    keyword: '',
+    showMoreOptions: false,
+    distance: 10,
+    gender: '',
+    insurance: ''
+  }
+
+  componentDidMount(){
+    this.fetchInsurances()
+  }
+
+
+  fetchInsurances(){
+    fetch('http://Localhost:3000/api/v1/doctor_database/insurances')
+      .then(res => res.json())
+      .then(json => this.setState({
+        insuranceList: json.data
+      }))
   }
 
   setPosition = (position) => {
-    console.log(position);
-      this.setState({latitude: position.coords.longitude, longitude: position.coords.latitude}, this.fetchDoctors)
+    this.setState({latitude: position.coords.latitude, longitude: position.coords.longitude}, this.fetchDoctors)
   }
 
   getLocation() {
@@ -24,13 +45,12 @@ export default class Home extends React.Component {
   }
 
   fetchDoctors = () => {
-    fetch(`http://Localhost:3000/api/v1/doctor_database?longitude=${this.state.longitude}&latitude=${this.state.latitude}`)
+    fetch(`http://Localhost:3000/api/v1/doctor_database/doctors?q=${this.state.keyword}&longitude=${this.state.longitude}&latitude=${this.state.latitude}`)
       .then(res => res.json())
       .then(doctors => this.setState({doctors}))
   }
 
-  clicked = (e) => {
-    e.preventDefault();
+  searchWithGoogleCoordinates = () => {
     let options = {
       method: "POST",
       headers: {
@@ -38,28 +58,49 @@ export default class Home extends React.Component {
         accept: "application/json"
       },
       body: JSON.stringify({
-        "location": this.state.input
+        "location": this.state.location
       })
     }
-    console.log(options)
     fetch('http://localhost:3000/api/v1/google', options)
       .then(res => res.json())
-      .then(json => console.log(json))
+      .then(json => this.setState({
+        longitude: json.lng,
+        latitude: json.lat
+      }, () => {
+        this.fetchDoctors()
+      }))
   }
 
-  handleChange = (e) => {
-    this.setState({
-      input: e.target.value
+  handleSearch = (values) => {
+    this.setState(values, () => {
+      if (this.state.location === "Current Location"){
+        this.getLocation()
+      } else {
+        this.searchWithGoogleCoordinates()
+      }
     })
   }
 
+  handleOptionsClick = () => (this.setState({showMoreOptions: !this.state.showMoreOptions}))
+
+  handleSliderChange = (distance) => (this.setState({ distance }))
+
+  handleGenderChange = (gender) => (this.setState({ gender }))
+
+  handleInsuranceChange = (insurance) => (this.setState({ insurance }))
+
   render(){
+    console.log(this.state)
     return(
       <div>
-        <form>
-          <input type="text" onChange={this.handleChange}/>
-          <button onClick={this.clicked}>Submit</button>
-        </form>
+        <h1>DOC FINDER</h1>
+        < SearchBar onSearch={this.handleSearch} insuranceList={this.state.insuranceList} changeInsurance={this.handleInsuranceChange} />
+        <div className="dividing header" style={{paddingLeft: 15}} >
+            {this.state.showMoreOptions ?
+              (<div>Less Options: <Icon onClick={this.handleOptionsClick} className='big' link name="minus"/> < Filters changeDistanceValue={this.handleSliderChange} changeGender={this.handleGenderChange} /> </div> ) :
+              (<div>More Options:<Icon onClick={this.handleOptionsClick} className='big' link name="plus"/></div>)
+            }
+        </div>
       </div>
     )
   }
