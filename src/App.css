@@ -22,11 +22,39 @@
 	font-size: large;
 }
 
-@keyframes App-logo-spin {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
-	}
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: baseline;
+}
+
+.optionsContainer {
+	display: flex;
+	justify-content: left;
+	padding-bottom: 40px
+}
+
+.searchBarItem {
+	flex-basis: auto
+}
+
+.flexItem {
+	flex-basis: auto;
+}
+
+.mainContainer {
+	display: grid;
+	grid-template-columns: 1fr 20px 1fr;
+}
+
+.mainItemMap {
+	justify-self: center;
+}
+.mainItemDoctors {
+	justify-self: center;
+	grid-column-start: 3
+}
+
+.oswald {
+	font-family: 'Oswald', sans-serif;
 }

@@ -5,7 +5,8 @@ import { Icon, Grid, Button, Label, Header, Container } from "semantic-ui-react"
 import DoctorsContainer from "./containers/DoctorsContainer";
 import DoctorsMapContainer from "./containers/DoctorsMapContainer"
 import DoctorPage from "./components/DoctorPage"
-
+import PageHeader from "./components/PageHeader"
+import "./App.css"
 
 export default class Home extends React.Component {
 	state = {
@@ -130,35 +131,33 @@ export default class Home extends React.Component {
 	render() {
 		return (
 			<div>
-				<Container fluid style={{"padding": 40}}>
-					<Header as='h1' icon textAlign="center">
-						<Icon name="doctor"/>
-						<Header.Content>
-							DOC FINDER
-						</Header.Content>
-					</Header>
-				</Container>
+				< PageHeader />
+				<SearchBar
+					 onSearch={this.handleSearch}
+					 insuranceList={this.state.insuranceList}
+					 changeInsurance={this.handleInsuranceChange}
+				/>
 
-				<Grid fluid container>
-				<Grid.Row>
-					<SearchBar onSearch={this.handleSearch} insuranceList={this.state.insuranceList} changeInsurance={this.handleInsuranceChange}/>
-				</Grid.Row>
-				<Grid.Row>
-						{this.state.showMoreOptions ? (
-							<div>
+				{this.state.showMoreOptions ?
+					(
+						<div className="optionsContainer">
+							<div className="flexItem" style={{paddingLeft: 30}}>
 								<Button as='div' labelPosition='left' onClick={this.handleOptionsClick}>
 									<Label basic>Less Options</Label>
 									<Button>
 										<Icon name="minus"/>
 									</Button>
 								</Button>
-								<Filters
-									changeDistanceValue={this.handleSliderChange}
-									changeGender={this.handleGenderChange}
-									/>
 							</div>
-						) : (
-							<div>
+							<Filters
+							changeDistanceValue={this.handleSliderChange}
+							changeGender={this.handleGenderChange}
+							/>
+						</div>
+					) :
+					(
+						<div className="optionsContainer">
+							<div className="flexItem" style={{paddingLeft: 30}}>
 								<Button as='div' labelPosition='left' onClick={this.handleOptionsClick}>
 									<Label basic>More Options</Label>
 									<Button>
@@ -166,30 +165,34 @@ export default class Home extends React.Component {
 									</Button>
 								</Button>
 							</div>
-						)}
-				</Grid.Row>
-			</Grid>
-
-			<div>
-
-
-					< DoctorsMapContainer toggleShowPage={this.toggleShowPage} doctors={this.state.doctors} location={ {lat: this.state.latitude, lng: this.state.longitude} }/>
-
-
-				{this.state.showDoctorPage ?
-					<DoctorPage dr={this.state.selectedDoctor}
-						onClick={this.hideShowPage} />
-					:
-					<DoctorsContainer
-						doctors={this.state.doctors}
-						insurance={this.state.insurance}
-						distance={this.state.distance}
-						gender={this.state.gender}
-						showDoctor={this.toggleShowPage}
-						/>
+						</div>
+					)
 				}
-			) : null }
+
+				<div className="mainContainer">
+					<div className="mainItemMap">
+						<DoctorsMapContainer
+							toggleShowPage={this.toggleShowPage}
+							doctors={this.state.doctors}
+							location={ {lat: this.state.latitude, lng: this.state.longitude} }
+							/>
 					</div>
+					<div className="mainItemDoctors">
+						{this.state.showDoctorPage ?
+								<DoctorPage dr={this.state.selectedDoctor}
+									onClick={this.hideShowPage}
+									/>
+								:
+								<DoctorsContainer
+									doctors={this.state.doctors}
+									insurance={this.state.insurance}
+									distance={this.state.distance}
+									gender={this.state.gender}
+									showDoctor={this.toggleShowPage}
+									/>
+							}
+					</div>
+				</div>
 			</div>
 		);
 	}

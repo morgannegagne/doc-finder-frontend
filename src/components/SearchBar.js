@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Input, Grid, Icon, Dropdown } from "semantic-ui-react";
+import { Form, Input, Icon, Dropdown } from "semantic-ui-react";
 
 export default class SearchBar extends React.Component {
 	state = {
@@ -57,61 +57,60 @@ export default class SearchBar extends React.Component {
 	render() {
 		const options = this.createInsuranceOptions();
 		return (
-			<Grid>
-				<Grid.Row centered>
-					<Grid.Column width={5}>
-						<Form onSubmit={this.handleSubmit}>
-							<Input
-								style={{ paddingLeft: 5, width: 400 }}
-								size="large"
-								onChange={this.handleInputChange}
-								value={this.state.keyword}
-								name="keyword"
-								placeholder="Search for condition, procedure, physician..."
-							/>
-						</Form>
-					</Grid.Column>
-					<Grid.Column width={5}>
-						<Form onSubmit={this.handleSubmit}>
-							<Form.Group inline>
-								<Form.Field inline>
-									<label>
-										<Icon
-											className="link big"
-											name="point"
-											onClick={this.useCurrentLocation}
-										/>
-									</label>
-									<Input
-										size="large"
-										style={{ width: 320 }}
-										onChange={this.handleInputChange}
-										value={this.state.location}
-										name="location"
-										placeholder="Location"
-									/>
-								</Form.Field>
-							</Form.Group>
-						</Form>
-					</Grid.Column>
-					<Grid.Column width={5}>
-						<Dropdown
-							onChange={this.handleSelectInsurance}
-							className="large"
-							placeholder="Select insurance"
-							search
-							selection
+			<div className="container">
+				<div className="searchBarItem">
+					<Form onSubmit={this.handleSubmit}>
+						<Input
 							fluid
-							options={options}
+							style={{ paddingLeft: 15, width: 400 }}
+							size="large"
+							onChange={this.handleInputChange}
+							value={this.state.keyword}
+							name="keyword"
+							placeholder="Search for condition, procedure, physician..."
 						/>
-					</Grid.Column>
-					<Grid.Column width={1}>
-						<button className="ui icon button big" onClick={this.handleSubmit}>
-							<i className="search icon" />
-						</button>
-					</Grid.Column>
-				</Grid.Row>
-			</Grid>
+					</Form>
+				</div>
+				<div style={{paddingLeft: 5}} className="searchBarItem">
+					<Form onSubmit={this.handleSubmit}>
+						<Form.Group inline fluid>
+							<Form.Field inline>
+								<label>
+									<Icon
+										className="link big"
+										name="point"
+										onClick={this.useCurrentLocation}
+									/>
+								</label>
+								<Input
+									size="large"
+									style={{ width: 370 }}
+									onChange={this.handleInputChange}
+									value={this.state.location}
+									name="location"
+									placeholder="Location"
+								/>
+							</Form.Field>
+						</Form.Group>
+					</Form>
+				</div>
+				<div className="searchBarItem">
+					<Dropdown
+						style={{width: 300}}
+						onChange={this.handleSelectInsurance}
+						className="large"
+						placeholder="Select insurance"
+						search
+						selection
+						options={options}
+					/>
+				</div>
+				<div style={{paddingLeft: 5}} className="searchBarItem">
+					<button className="ui icon button big" onClick={this.handleSubmit}>
+						<i className="search icon" />
+					</button>
+				</div>
+			</div>
 		);
 	}
 }

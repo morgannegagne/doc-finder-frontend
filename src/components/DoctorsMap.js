@@ -16,14 +16,15 @@ const DoctorsMap = withScriptjs(withGoogleMap((props) =>{
                   />
     return marker
   })
-  console.log(props)
   return (
+    <div className="mainItem">
       <GoogleMap
         defaultZoom={14}
         center={ props.location }
         >
         {markers}
       </GoogleMap>
+    </div>
     )
 
   }

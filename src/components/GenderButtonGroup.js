@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Icon } from 'semantic-ui-react'
+import { Button, Icon, Grid } from 'semantic-ui-react'
 
 const GenderButtonGroup = (props) => {
 
@@ -8,17 +8,19 @@ const GenderButtonGroup = (props) => {
   }
 
   return(
-    <Button.Group onClick={handleClick} compact>
-      <Button labelPostion="left" value="female">
-        <Icon name="female" />
-        Female
-      </Button>
-      <Button value="">Any Gender</Button>
-      <Button labelPostion="right" value="male">
-        <Icon name="male"/>
-        Male
-      </Button>
-    </Button.Group>
+    <div className="item" style={{paddingLeft: 30}}>
+      <Button.Group onClick={handleClick} compact>
+        <Button labelPostion="left" value="female">
+          <Icon name="female" />
+          Female
+        </Button>
+        <Button value="">Any Gender</Button>
+        <Button labelPostion="right" value="male">
+          <Icon name="male"/>
+          Male
+        </Button>
+      </Button.Group>
+    </div>
   )
 }
 

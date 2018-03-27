@@ -3,6 +3,7 @@ import 'rc-tooltip/assets/bootstrap.css';
 import React from 'react';
 import Tooltip from 'rc-tooltip';
 import Slider from 'rc-slider';
+import { Grid } from 'semantic-ui-react'
 
 const createSliderWithTooltip = Slider.createSliderWithTooltip;
 const Handle = Slider.Handle;
@@ -38,7 +39,7 @@ export default class DistanceSlider extends React.Component {
 
   render(){
     return (
-      <div style={wrapperStyle}>
+      <div className="item" style={{paddingLeft: 30}}>
         <p>Filter by distance ({this.state.value} {this.state.value == 1 ? 'mile' : 'miles'})</p>
         <Slider min={1} max={10} defaultValue={10} handle={handle} onAfterChange={this.handleSliderChange} />
       </div>

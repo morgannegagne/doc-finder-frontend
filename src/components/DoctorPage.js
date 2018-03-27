@@ -89,7 +89,7 @@ export default class DoctorPage extends React.Component {
 	render() {
 		this.findClosestPractice();
 		return (
-			<div>
+			<div className="mainItemDoctors">
 				<Grid celled>
 					<Grid.Row>
 						<Grid.Column width={2}>
@@ -140,7 +140,6 @@ export default class DoctorPage extends React.Component {
 								<h4>Practice Locations:</h4>
 								<ul>{this.practicesList()}</ul>
 							</Grid.Column>
-
 							<Grid.Column>
 								<h4>Accepted Insurance:</h4>
 								{this.listOfInsurancesAccepted()}

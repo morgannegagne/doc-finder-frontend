@@ -10,18 +10,12 @@ export default class Filters extends React.Component {
 
 	render() {
 		return (
-			<Grid>
-				<Grid.Row centered>
-					<Grid.Column width={4}>
-						<DistanceSlider
-							changeDistanceValue={this.props.changeDistanceValue}
-						/>
-					</Grid.Column>
-					<Grid.Column width={4} centered stretched>
-						<GenderButtonGroup changeGender={this.props.changeGender} />
-					</Grid.Column>
-				</Grid.Row>
-			</Grid>
+			<div className="container">
+				<DistanceSlider
+					changeDistanceValue={this.props.changeDistanceValue}
+					/>
+				<GenderButtonGroup changeGender={this.props.changeGender}/>
+			</div>
 		);
 	}
 }
