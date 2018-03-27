@@ -6,7 +6,8 @@ import {
 	List,
 	Container,
 	Button,
-	Label
+	Label,
+	Segment
 } from "semantic-ui-react";
 
 export default class DoctorPage extends React.Component {
@@ -89,13 +90,13 @@ export default class DoctorPage extends React.Component {
 	render() {
 		this.findClosestPractice();
 		return (
-			<div className="mainItemDoctors">
-				<Grid celled>
+			<Segment>
+				<Grid celled fluid>
 					<Grid.Row>
 						<Grid.Column width={2}>
 							<Image src={this.props.dr.profile.image_url} />
 						</Grid.Column>
-						<Grid.Column width={12}>
+						<Grid.Column width={8}>
 							<Header as="h1">
 								Dr. {this.props.dr.profile.first_name}{" "}
 								{this.props.dr.profile.last_name}, {this.props.dr.profile.title}
@@ -129,7 +130,7 @@ export default class DoctorPage extends React.Component {
 						</Grid.Column>
 					</Grid.Row>
 				</Grid>
-				<Container>
+				<Container textAlign="left">
 					<h4>{this.props.dr.profile.bio}</h4>
 					<h4>{this.props.dr.specialties[0].description}</h4>
 					<br />
@@ -147,7 +148,7 @@ export default class DoctorPage extends React.Component {
 						</Grid.Row>
 					</Grid>
 				</Container>
-			</div>
+			</Segment>
 		);
 	}
 }

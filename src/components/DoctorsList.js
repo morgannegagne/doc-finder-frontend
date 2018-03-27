@@ -64,7 +64,7 @@ export default class DoctorsList extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div className="mainItemDoctors">
 				{this.state.clicked ? (
 					<DoctorPage
 						dr={this.state.selectedDoctor}

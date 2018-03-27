@@ -100,8 +100,8 @@ export default class DoctorCard extends React.Component {
 					src={this.props.dr.profile.image_url}
 					onClick={e => this.props.onClick(this.props.dr)}
 				/>
-				<Item.Content>
-					<Item.Header as="a" onClick={e => this.props.onClick(this.props.dr)}>
+			<Item.Content>
+					<Item.Header as="a" onClick={e => this.props.onClick(this.props.dr)} >
 						Dr. {this.props.dr.profile.first_name}{" "}
 						{this.props.dr.profile.last_name}, {this.props.dr.profile.title}
 					</Item.Header>

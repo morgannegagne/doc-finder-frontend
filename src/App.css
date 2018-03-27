@@ -1,5 +1,6 @@
 .App {
 	text-align: center;
+	background-color: rgb(240, 243, 246)
 }
 
 .App-logo {
@@ -8,10 +9,9 @@
 }
 
 .App-header {
-	background-color: #222;
-	height: 150px;
+	background-color: rgb(95, 124, 162);
+	height: 200px;
 	padding: 20px;
-	color: white;
 }
 
 .App-title {
@@ -44,7 +44,7 @@
 
 .mainContainer {
 	display: grid;
-	grid-template-columns: 1fr 20px 1fr;
+	grid-template-columns: 50% 50%;
 }
 
 .mainItemMap {
@@ -52,7 +52,7 @@
 }
 .mainItemDoctors {
 	justify-self: center;
-	grid-column-start: 3
+	grid-column-start: 2;
 }
 
 .oswald {

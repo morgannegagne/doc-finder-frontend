@@ -177,11 +177,12 @@ export default class Home extends React.Component {
 							location={ {lat: this.state.latitude, lng: this.state.longitude} }
 							/>
 					</div>
-					<div className="mainItemDoctors">
 						{this.state.showDoctorPage ?
-								<DoctorPage dr={this.state.selectedDoctor}
-									onClick={this.hideShowPage}
-									/>
+								<div className="mainItemDoctors">
+									<DoctorPage dr={this.state.selectedDoctor}
+										onClick={this.hideShowPage}
+										/>
+								</div>
 								:
 								<DoctorsContainer
 									doctors={this.state.doctors}
@@ -191,7 +192,6 @@ export default class Home extends React.Component {
 									showDoctor={this.toggleShowPage}
 									/>
 							}
-					</div>
 				</div>
 			</div>
 		);
