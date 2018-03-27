@@ -1,6 +1,6 @@
 import React from "react";
 import DoctorCard from "./DoctorCard";
-import { Item } from "semantic-ui-react";
+import { Item, Segment } from "semantic-ui-react";
 import uuid from "uuid";
 import DoctorPage from "./DoctorPage";
 
@@ -64,7 +64,7 @@ export default class DoctorsList extends React.Component {
 
 	render() {
 		return (
-			<div className="mainItemDoctors">
+			<div className="mainItemDoctors" style={{paddingRight: 20}}>
 				{this.state.clicked ? (
 					<DoctorPage
 						dr={this.state.selectedDoctor}
@@ -72,7 +72,9 @@ export default class DoctorsList extends React.Component {
 						key={uuid()}
 					/>
 				) : (
-					<Item.Group divided>{this.createDoctorCards()}</Item.Group>
+					<Segment style={{height: 600, overflow: "scroll"}}>
+						<Item.Group divided>{this.createDoctorCards()}</Item.Group>
+					</Segment>
 				)}
 			</div>
 		);

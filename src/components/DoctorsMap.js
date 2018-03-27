@@ -1,5 +1,6 @@
 import React from "react";
 import { withScriptjs, withGoogleMap, GoogleMap } from "react-google-maps";
+import { Segment } from "semantic-ui-react"
 import DoctorMarker from "./DoctorMarker"
 
 const DoctorsMap = withScriptjs(withGoogleMap((props) =>{
@@ -17,14 +18,12 @@ const DoctorsMap = withScriptjs(withGoogleMap((props) =>{
     return marker
   })
   return (
-    <div className="mainItem">
       <GoogleMap
         defaultZoom={14}
         center={ props.location }
         >
         {markers}
       </GoogleMap>
-    </div>
     )
 
   }

@@ -57,7 +57,7 @@ export default class SearchBar extends React.Component {
 	render() {
 		const options = this.createInsuranceOptions();
 		return (
-			<div className="container">
+			<div className="container" style={{paddingTop: 30}}>
 				<div className="searchBarItem">
 					<Form onSubmit={this.handleSubmit}>
 						<Input

@@ -1,17 +1,16 @@
 .App {
-	text-align: center;
 	background-color: rgb(240, 243, 246)
-}
-
-.App-logo {
-	animation: App-logo-spin infinite 20s linear;
-	height: 80px;
 }
 
 .App-header {
 	background-color: rgb(95, 124, 162);
 	height: 200px;
-	padding: 20px;
+	text-align: center
+}
+
+.header-text {
+	color: #FFF;
+	font-size: 3.5em;
 }
 
 .App-title {
@@ -50,9 +49,15 @@
 .mainItemMap {
 	justify-self: center;
 }
+
+.mainItemDoctors .ui.container {
+	width: auto;
+}
+
 .mainItemDoctors {
-	justify-self: center;
+	justify-self: left;
 	grid-column-start: 2;
+	grid-column-margin: 10px;
 }
 
 .oswald {
