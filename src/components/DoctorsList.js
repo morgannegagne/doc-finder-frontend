@@ -47,7 +47,6 @@ export default class DoctorsList extends React.Component {
 	};
 
 	filterDoctorsListByGender = () => {
-		console.log(this.props.gender);
 		if (this.props.gender === "") {
 			return this.filterDoctorsListByDistance();
 		} else {
@@ -59,7 +58,7 @@ export default class DoctorsList extends React.Component {
 
 	createDoctorCards = () => {
 		return this.filterDoctorsListByGender().map(doctor => (
-			<DoctorCard dr={doctor} key={uuid()} onClick={this.handleListClick} />
+			<DoctorCard dr={doctor} key={uuid()} onClick={this.handleListClick} toggleShowPage={this.props.toggleShowPage} />
 		));
 	};
 

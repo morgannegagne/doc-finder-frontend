@@ -1,7 +1,7 @@
 import React from "react";
 import SearchBar from "./components/SearchBar";
 import Filters from "./components/Filters";
-import { Icon, Grid } from "semantic-ui-react";
+import { Icon, Grid, Button, Label, Header, Container } from "semantic-ui-react";
 import DoctorsContainer from "./containers/DoctorsContainer";
 import DoctorsMapContainer from "./containers/DoctorsMapContainer"
 import DoctorPage from "./components/DoctorPage"
@@ -18,7 +18,9 @@ export default class Home extends React.Component {
 		showMoreOptions: false,
 		distance: 10,
 		gender: "",
-		insurance: ""
+		insurance: "",
+		showDoctorPage: false,
+		selectedDoctor: ""
 	};
 
 	componentDidMount() {
@@ -107,6 +109,15 @@ export default class Home extends React.Component {
 		);
 	};
 
+	toggleShowPage = (dr) => {
+		let doctor = this.state.doctors.find(doctor => doctor.uid === dr.uid)
+		this.setState({showDoctorPage: true, selectedDoctor: doctor})
+	}
+
+	hideShowPage = () => {
+		this.setState({showDoctorPage: false, selectedDoctor: ""})
+	}
+
 	handleOptionsClick = () =>
 		this.setState({ showMoreOptions: !this.state.showMoreOptions });
 
@@ -119,55 +130,66 @@ export default class Home extends React.Component {
 	render() {
 		return (
 			<div>
-				<h1>DOC FINDER</h1>
-				<SearchBar
-					onSearch={this.handleSearch}
-					insuranceList={this.state.insuranceList}
-					changeInsurance={this.handleInsuranceChange}
-				/>
-				<div className="dividing header" style={{ paddingLeft: 15 }}>
-					{this.state.showMoreOptions ? (
-						<div>
-							Less Options:{" "}
-							<Icon
-								onClick={this.handleOptionsClick}
-								className="big"
-								link
-								name="minus"
-							/>{" "}
-							<Filters
-								changeDistanceValue={this.handleSliderChange}
-								changeGender={this.handleGenderChange}
-							/>{" "}
-						</div>
-					) : (
-						<div>
-							More Options:<Icon
-								onClick={this.handleOptionsClick}
-								className="big"
-								link
-								name="plus"
-							/>
-						</div>
-					)}
-				</div>
-					{this.state.doctors.length ? (
-						<Grid>
-							<Grid.Row>
-								<Grid.Column width={8} floated="right" >
-									< DoctorsMapContainer doctors={this.state.doctors} location={ {lat: this.state.latitude, lng: this.state.longitude} }/>
-								</Grid.Column>
-								<Grid.Column width={8}>
-									<DoctorsContainer
-										doctors={this.state.doctors}
-										insurance={this.state.insurance}
-										distance={this.state.distance}
-										gender={this.state.gender}
+				<Container fluid style={{"padding": 40}}>
+					<Header as='h1' icon textAlign="center">
+						<Icon name="doctor"/>
+						<Header.Content>
+							DOC FINDER
+						</Header.Content>
+					</Header>
+				</Container>
+
+				<Grid fluid container>
+				<Grid.Row>
+					<SearchBar onSearch={this.handleSearch} insuranceList={this.state.insuranceList} changeInsurance={this.handleInsuranceChange}/>
+				</Grid.Row>
+				<Grid.Row>
+						{this.state.showMoreOptions ? (
+							<div>
+								<Button as='div' labelPosition='left' onClick={this.handleOptionsClick}>
+									<Label basic>Less Options</Label>
+									<Button>
+										<Icon name="minus"/>
+									</Button>
+								</Button>
+								<Filters
+									changeDistanceValue={this.handleSliderChange}
+									changeGender={this.handleGenderChange}
 									/>
-								</Grid.Column>
-							</Grid.Row>
-						</Grid>
-					) : null}
+							</div>
+						) : (
+							<div>
+								<Button as='div' labelPosition='left' onClick={this.handleOptionsClick}>
+									<Label basic>More Options</Label>
+									<Button>
+										<Icon name="plus"/>
+									</Button>
+								</Button>
+							</div>
+						)}
+				</Grid.Row>
+			</Grid>
+
+			<div>
+
+
+					< DoctorsMapContainer toggleShowPage={this.toggleShowPage} doctors={this.state.doctors} location={ {lat: this.state.latitude, lng: this.state.longitude} }/>
+
+
+				{this.state.showDoctorPage ?
+					<DoctorPage dr={this.state.selectedDoctor}
+						onClick={this.hideShowPage} />
+					:
+					<DoctorsContainer
+						doctors={this.state.doctors}
+						insurance={this.state.insurance}
+						distance={this.state.distance}
+						gender={this.state.gender}
+						showDoctor={this.toggleShowPage}
+						/>
+				}
+			) : null }
+					</div>
 			</div>
 		);
 	}

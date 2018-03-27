@@ -5,7 +5,8 @@ export default class DoctorsMapContainer extends React.Component {
 
 	state = {
 		doctors: [],
-		location: this.props.location
+		location: this.props.location,
+		activeMarker: null
 	}
 
 	componentWillReceiveProps(nextProps){
@@ -29,8 +30,13 @@ export default class DoctorsMapContainer extends React.Component {
 		});
 	};
 
+	closeOtherMarkers = (uid) => {
+		this.setState({activeMarker: uid})
+	}
+
 	render() {
 		const doctors = this.findClosestPractice()
+		console.log(this.state.activeMarker)
 		return (
 			<div>
 				<DoctorsMap
@@ -41,6 +47,9 @@ export default class DoctorsMapContainer extends React.Component {
 					containerElement={<div style={{ height: `600px`, width: `100%` }} />}
 					mapElement={<div style={{ height: `80%` }} />}
 					doctors={doctors}
+					toggleShowPage={this.props.toggleShowPage}
+					activeMarker={this.state.activeMarker}
+					closeOtherMarkers={this.closeOtherMarkers}
 				/>
 			</div>
 		);

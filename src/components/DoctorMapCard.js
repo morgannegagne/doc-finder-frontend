@@ -1,10 +1,13 @@
 import React from "react";
-import { Item } from "semantic-ui-react";
-import { NavLink } from "react-router-dom"
+import { Item, Button } from "semantic-ui-react";
 
 const DoctorMapCard = (props) => {
 
 	const { dr } = props
+
+	const handleClick = (e) => {
+		props.toggleShowPage(dr)
+	}
 
 	return (
 		<Item>
@@ -40,6 +43,7 @@ const DoctorMapCard = (props) => {
 						<br />
 					</span>
 				</Item.Meta>
+				<Button onClick={handleClick}>See Profile</Button>
 			</Item.Content>
 		</Item>
 	);
