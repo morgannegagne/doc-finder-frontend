@@ -1,6 +1,7 @@
 import React from "react";
 import { Marker, InfoWindow } from "react-google-maps";
 import DoctorMapCard from "./DoctorMapCard"
+import StethoscopeIcon from "../stethoscopeIcon.png"
 
 export default class DoctorMarker extends React.Component {
 
@@ -31,6 +32,7 @@ export default class DoctorMarker extends React.Component {
       <div>
         <Marker onClick={this.toggleOpen}
           position={this.props.location}
+          icon={StethoscopeIcon}
         >
         { this.state.isOpen && this.state.activeMarker ?
           <InfoWindow maxWidth={800} defaultPosition={ this.props.location } onCloseClick={this.props.onToggleOpen}>

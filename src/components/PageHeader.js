@@ -1,12 +1,13 @@
 import React from 'react'
-import { Icon, Header, Container } from "semantic-ui-react";
+import { Icon, Header, Container, Image} from "semantic-ui-react";
+import StethocopeHeader from "../stethoscope.png"
 
 
 const PageHeader = () => {
   return(
     <Container fluid style={{"padding": 40}} className="App-header">
-      <Icon className="doctor"/>
       <h1 id="header-text" className="oswald header-text">
+        <Image src={StethocopeHeader} inline style={{height: 100}}/>
         DOC FINDER
       </h1>
     </Container>

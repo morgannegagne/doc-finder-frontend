@@ -169,40 +169,42 @@ export default class Home extends React.Component {
 					)
 				}
 
-				<div className="mainContainer">
-					<div className="mainItemMap">
-						<Segment>
-							<DoctorsMapContainer
-								toggleShowPage={this.toggleShowPage}
-								doctors={this.state.doctors}
-								location={ {lat: this.state.latitude, lng: this.state.longitude} }
-								/>
-						</Segment>
-					</div>
+				{this.state.doctors.length ? (
+					<div className="mainContainer">
+						<div className="mainItemMap">
+							<Segment>
+								<DoctorsMapContainer
+									toggleShowPage={this.toggleShowPage}
+									doctors={this.state.doctors}
+									location={ {lat: this.state.latitude, lng: this.state.longitude} }
+									/>
+							</Segment>
+						</div>
 
-							{this.state.showDoctorPage ?
-								(
-									<div className="mainItemDoctors">
-										<DoctorPage dr={this.state.selectedDoctor}
-											onClick={this.hideShowPage}
-											/>
-									</div>
-								)
-
-						 			:
-								(
-									<DoctorsContainer
-										doctors={this.state.doctors}
-										insurance={this.state.insurance}
-										distance={this.state.distance}
-										gender={this.state.gender}
-										showDoctor={this.toggleShowPage}
+						{this.state.showDoctorPage ?
+							(
+								<div className="mainItemDoctors">
+									<DoctorPage dr={this.state.selectedDoctor}
+										onClick={this.hideShowPage}
 										/>
-								)
+								</div>
+							)
+							:
+							(
+								<DoctorsContainer
+									doctors={this.state.doctors}
+									insurance={this.state.insurance}
+									distance={this.state.distance}
+									gender={this.state.gender}
+									showDoctor={this.toggleShowPage}
+									/>
+							)
 						}
-
-
-				</div>
+					</div>
+					) : (
+						null
+					)
+				}
 			</div>
 		);
 	}
