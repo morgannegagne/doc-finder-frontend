@@ -60,6 +60,16 @@
 	grid-column-margin: 10px;
 }
 
-.oswald {
-	font-family: 'Oswald', sans-serif;
+.ui.primary.button {
+	color: #FFF;
+	background-color: rgb(95, 124, 162);
+}
+
+.work-sans {
+	font-family: 'Work Sans', sans-serif;
+}
+
+footer {
+	padding-top: 10px;
+	background-color: rgb(240, 243, 246)
 }

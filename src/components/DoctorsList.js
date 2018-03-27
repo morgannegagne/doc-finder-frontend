@@ -72,7 +72,7 @@ export default class DoctorsList extends React.Component {
 						key={uuid()}
 					/>
 				) : (
-					<Segment style={{height: 600, overflow: "scroll"}}>
+					<Segment style={{height: 620, overflow: "scroll"}}>
 						<Item.Group divided>{this.createDoctorCards()}</Item.Group>
 					</Segment>
 				)}

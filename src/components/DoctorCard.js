@@ -101,7 +101,7 @@ export default class DoctorCard extends React.Component {
 					onClick={e => this.props.onClick(this.props.dr)}
 				/>
 			<Item.Content>
-					<Item.Header as="a" onClick={e => this.props.onClick(this.props.dr)} >
+					<Item.Header as="a" onClick={e => this.props.onClick(this.props.dr)} style={{color: "rgb(95, 124, 162)"}}>
 						Dr. {this.props.dr.profile.first_name}{" "}
 						{this.props.dr.profile.last_name}, {this.props.dr.profile.title}
 					</Item.Header>

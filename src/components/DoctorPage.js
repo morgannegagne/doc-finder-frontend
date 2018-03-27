@@ -97,7 +97,7 @@ export default class DoctorPage extends React.Component {
 							<Image src={this.props.dr.profile.image_url} />
 						</Grid.Column>
 						<Grid.Column width={8}>
-							<Header as="h1">
+							<Header as="h1" style={{color: "rgb(95, 124, 162)"}}>
 								Dr. {this.props.dr.profile.first_name}{" "}
 								{this.props.dr.profile.last_name}, {this.props.dr.profile.title}
 							</Header>
@@ -123,7 +123,7 @@ export default class DoctorPage extends React.Component {
 								</List.Item>
 							</List>
 						</Grid.Column>
-						<Grid.Column width={2}>
+						<Grid.Column stretched width={6} style={{textAlign: "center"}}>
 							<Button onClick={this.props.onClick}>
 								<h1>Back To List</h1>
 							</Button>

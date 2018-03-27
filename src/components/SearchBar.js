@@ -80,6 +80,7 @@ export default class SearchBar extends React.Component {
 										className="link big"
 										name="point"
 										onClick={this.useCurrentLocation}
+										style={{color: "rgb(95, 124, 162)"}}
 									/>
 								</label>
 								<Input
@@ -106,7 +107,7 @@ export default class SearchBar extends React.Component {
 					/>
 				</div>
 				<div style={{paddingLeft: 5}} className="searchBarItem">
-					<button className="ui icon button big" onClick={this.handleSubmit}>
+					<button className="ui icon primary button big" onClick={this.handleSubmit} >
 						<i className="search icon" />
 					</button>
 				</div>
