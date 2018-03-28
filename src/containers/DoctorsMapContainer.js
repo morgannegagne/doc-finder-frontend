@@ -1,6 +1,5 @@
 import React from "react";
 import DoctorsMap from "../components/DoctorsMap";
-import apiKey from "../apiKey"
 
 export default class DoctorsMapContainer extends React.Component {
 
