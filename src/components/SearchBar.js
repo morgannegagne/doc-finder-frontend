@@ -73,7 +73,7 @@ export default class SearchBar extends React.Component {
 				</div>
 				<div style={{paddingLeft: 5}} className="searchBarItem">
 					<Form onSubmit={this.handleSubmit}>
-						<Form.Group inline fluid>
+						<Form.Group inline>
 							<Form.Field inline>
 								<label>
 									<Icon

@@ -16,7 +16,7 @@ export default class DoctorPage extends React.Component {
 	};
 
 	findClosestPractice = () => {
-		this.props.dr.practices.map(practice => {
+		this.props.dr.practices.forEach(practice => {
 			if (practice.distance < this.state.closestPractice.distance) {
 				this.setState({
 					closestPractice: practice
@@ -46,7 +46,7 @@ export default class DoctorPage extends React.Component {
 		if (this.props.dr.ratings.length) {
 			this.props.dr.ratings.forEach(rating => {
 				if (rating.provider === "betterdoctor") {
-					ratingImg = <img src={rating.image_url_small} />;
+					ratingImg = <img src={rating.image_url_small} alt="" />;
 				}
 			});
 		}
@@ -86,14 +86,13 @@ export default class DoctorPage extends React.Component {
 			return sortedInsurance.map(insurance => <Label content={insurance} />);
 		}
 	};
-
 	render() {
 		this.findClosestPractice();
 		return (
 			<Segment>
 				<Grid celled fluid>
 					<Grid.Row>
-						<Grid.Column width={2}>
+						<Grid.Column width={3}>
 							<Image src={this.props.dr.profile.image_url} />
 						</Grid.Column>
 						<Grid.Column width={8}>
@@ -123,7 +122,7 @@ export default class DoctorPage extends React.Component {
 								</List.Item>
 							</List>
 						</Grid.Column>
-						<Grid.Column stretched width={6} style={{textAlign: "center"}}>
+						<Grid.Column stretched width={5} style={{textAlign: "center"}}>
 							<Button onClick={this.props.onClick}>
 								<h1>Back To List</h1>
 							</Button>

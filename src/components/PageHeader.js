@@ -1,5 +1,5 @@
 import React from 'react'
-import { Icon, Header, Container, Image} from "semantic-ui-react";
+import { Container, Image} from "semantic-ui-react";
 import StethocopeHeader from "../stethoscope.png"
 
 

@@ -1,5 +1,4 @@
 import React from "react";
-import { Grid } from "semantic-ui-react";
 import DistanceSlider from "./DistanceSlider";
 import GenderButtonGroup from "./GenderButtonGroup";
 
