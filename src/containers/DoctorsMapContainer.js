@@ -1,5 +1,5 @@
 import React from "react";
-import DoctorsMap from "../components/DoctorsMap";=
+import DoctorsMap from "../components/DoctorsMap";
 
 export default class DoctorsMapContainer extends React.Component {
 
