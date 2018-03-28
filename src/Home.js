@@ -128,7 +128,49 @@ export default class Home extends React.Component {
 
 	handleInsuranceChange = insurance => this.setState({ insurance });
 
+
+	filterDoctorsListByInsurance = (doctors) => {
+		if (this.state.insurance === "") {
+			return doctors;
+		} else {
+			return doctors.filter(doctor => {
+				const insurances = doctor.insurances.map(
+					insurance => insurance.insurance_provider.name
+				);
+				return insurances.includes(this.state.insurance);
+			});
+		}
+	};
+
+	filterDoctorsListByDistance = (doctors) => {
+		return doctors.filter(doctor => {
+			const practiceDistance = doctor.practices
+				.map(practice => practice.distance)
+				.sort();
+			return practiceDistance[0] < this.state.distance;
+		});
+	};
+
+	filterDoctorsListByGender = () => {
+		if (this.state.gender === "") {
+			return this.state.doctors
+		} else {
+			return this.state.doctors.filter(doctor => {
+				return doctor.profile.gender === this.state.gender;
+			});
+		}
+	};
+
+	filterDoctors = () => {
+		let filteredDoctors = this.filterDoctorsListByGender()
+		filteredDoctors = this.filterDoctorsListByDistance(filteredDoctors)
+		filteredDoctors = this.filterDoctorsListByInsurance(filteredDoctors)
+		return filteredDoctors
+	}
+
 	render() {
+
+		const filteredDoctors = this.filterDoctors()
 		return (
 			<div>
 				< PageHeader />
@@ -175,7 +217,7 @@ export default class Home extends React.Component {
 							<Segment>
 								<DoctorsMapContainer
 									toggleShowPage={this.toggleShowPage}
-									doctors={this.state.doctors}
+									doctors={filteredDoctors}
 									location={ {lat: this.state.latitude, lng: this.state.longitude} }
 									/>
 							</Segment>
@@ -192,7 +234,7 @@ export default class Home extends React.Component {
 							:
 							(
 								<DoctorsContainer
-									doctors={this.state.doctors}
+									doctors={filteredDoctors}
 									insurance={this.state.insurance}
 									distance={this.state.distance}
 									gender={this.state.gender}
