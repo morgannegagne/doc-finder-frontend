@@ -73,3 +73,11 @@ footer {
 	padding-top: 10px;
 	background-color: rgb(240, 243, 246)
 }
+
+.ui.segment.welcomeBox {
+	height: auto;
+	width: 50%;
+	text-align: center;
+	margin: auto;
+	font-family: 'Work Sans', sans-serif;
+}

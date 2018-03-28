@@ -6,6 +6,7 @@ import DoctorsContainer from "./containers/DoctorsContainer";
 import DoctorsMapContainer from "./containers/DoctorsMapContainer"
 import DoctorPage from "./components/DoctorPage"
 import PageHeader from "./components/PageHeader"
+import WelcomeBox from "./components/WelcomeBox"
 import "./App.css"
 
 export default class Home extends React.Component {
@@ -29,7 +30,7 @@ export default class Home extends React.Component {
 	}
 
 	fetchInsurances() {
-		fetch("http://Localhost:3000/api/v1/doctor_database/insurances")
+		fetch("https://doc-finder-api.herokuapp.com/api/v1/doctor_database/insurances")
 			.then(res => res.json())
 			.then(json =>
 				this.setState({
@@ -50,21 +51,22 @@ export default class Home extends React.Component {
 
 	getLocation() {
 		if (navigator.geolocation) {
-			console.log("getting position");
 			navigator.geolocation.getCurrentPosition(this.setPosition);
 		} else {
-			console.log("Geolocation is not supported by this browser.");
+			alert("Geolocation is not supported by this browser. Enter an address.")
 		}
 	}
 
 	fetchDoctors = () => {
 		fetch(
-			`http://Localhost:3000/api/v1/doctor_database/doctors?q=${
+			`https://doc-finder-api.herokuapp.com/api/v1/doctor_database/doctors?q=${
 				this.state.keyword
 			}&longitude=${this.state.longitude}&latitude=${this.state.latitude}`
 		)
 			.then(res => res.json())
-			.then(doctors => this.setState({ doctors: doctors.data }));
+			.then(doctors => {
+				this.setState({ doctors: doctors.data });
+			})
 	};
 
 	searchWithGoogleCoordinates = () => {
@@ -78,18 +80,21 @@ export default class Home extends React.Component {
 				location: this.state.location
 			})
 		};
-		fetch("http://localhost:3000/api/v1/google", options)
+		fetch("https://doc-finder-api.herokuapp.com/api/v1/google", options)
 			.then(res => res.json())
-			.then(json =>
-				this.setState(
-					{
-						longitude: json.lng,
-						latitude: json.lat
-					},
-					() => {
-						this.fetchDoctors();
-					}
-				)
+			.then(json => {
+				if (!json.error){
+					this.setState(
+						{
+							longitude: json.lng,
+							latitude: json.lat
+						},
+						() => {
+							this.fetchDoctors();
+						}
+					)
+				}
+			}
 			);
 	};
 
@@ -244,7 +249,7 @@ export default class Home extends React.Component {
 						}
 					</div>
 					) : (
-						null
+						<WelcomeBox />
 					)
 				}
 			</div>

@@ -72,7 +72,7 @@ export default class DoctorCard extends React.Component {
 									src={rating.provider_url}
 									width="1025"
 									height="576.56"
-									title={`${this.props.profile.slug}-yelp`}
+									title=""
 								/>
 							</Modal.Description>
 						</Modal.Content>
