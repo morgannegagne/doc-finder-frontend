@@ -6063,6 +6063,10 @@ require-directory@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/require-directory/-/require-directory-2.1.1.tgz#8c64ad5fd30dab1c976e2344ffe7f792a6a6df42"
 
+require-environment-variables@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/require-environment-variables/-/require-environment-variables-1.1.2.tgz#50b1b48343aa814931b0eb961aba64f0bb7795fd"
+
 require-from-string@^1.1.0:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/require-from-string/-/require-from-string-1.2.1.tgz#529c9ccef27380adfec9a2f965b649bbee636418"
