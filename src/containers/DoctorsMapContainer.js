@@ -1,5 +1,6 @@
 import React from "react";
 import DoctorsMap from "../components/DoctorsMap";
+import apiKey from "../apiKey"
 
 export default class DoctorsMapContainer extends React.Component {
 
@@ -40,7 +41,7 @@ export default class DoctorsMapContainer extends React.Component {
 				<DoctorsMap
 					doctors={doctors}
 					location={this.state.location}
-					googleMapURL={"https://maps.googleapis.com/maps/api/js?key=AIzaSyBO37tWXY7797JXJmFXstlFy4J6rSMcu68&v=3.exp&libraries=geometry,drawing,places"}
+					googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${apiKey}&v=3.exp&libraries=geometry,drawing,places`}
 					loadingElement={<div style={{ height: `100%` }} />}
 					containerElement={<div style={{ height: `600px`, width: `600px` }} />}
 					mapElement={<div style={{ height: `100%` }} />}
