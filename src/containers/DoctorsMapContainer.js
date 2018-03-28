@@ -40,7 +40,7 @@ export default class DoctorsMapContainer extends React.Component {
 				<DoctorsMap
 					doctors={doctors}
 					location={this.state.location}
-					googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.apiKey}&v=3.exp&libraries=geometry,drawing,places`}
+					googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_apiKey}&v=3.exp&libraries=geometry,drawing,places`}
 					loadingElement={<div style={{ height: `100%` }} />}
 					containerElement={<div style={{ height: `600px`, width: `600px` }} />}
 					mapElement={<div style={{ height: `100%` }} />}
