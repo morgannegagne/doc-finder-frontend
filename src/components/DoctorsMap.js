@@ -1,6 +1,5 @@
 import React from "react";
 import { withScriptjs, withGoogleMap, GoogleMap } from "react-google-maps";
-import { Segment } from "semantic-ui-react"
 import DoctorMarker from "./DoctorMarker"
 
 const DoctorsMap = withScriptjs(withGoogleMap((props) =>{
@@ -25,10 +24,7 @@ const DoctorsMap = withScriptjs(withGoogleMap((props) =>{
         {markers}
       </GoogleMap>
     )
-
   }
-
-
 ))
 
 export default DoctorsMap

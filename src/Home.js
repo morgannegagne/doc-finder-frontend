@@ -1,7 +1,7 @@
 import React from "react";
 import SearchBar from "./components/SearchBar";
 import Filters from "./components/Filters";
-import { Icon, Grid, Button, Label, Header, Container, Segment } from "semantic-ui-react";
+import { Icon, Button, Label, Segment } from "semantic-ui-react";
 import DoctorsContainer from "./containers/DoctorsContainer";
 import DoctorsMapContainer from "./containers/DoctorsMapContainer"
 import DoctorPage from "./components/DoctorPage"

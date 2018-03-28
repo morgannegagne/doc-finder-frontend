@@ -1,14 +1,5 @@
 import React from "react";
-import {
-	Button,
-	Icon,
-	Image as ImageComponent,
-	Image,
-	Item,
-	Label,
-	Modal,
-	Grid
-} from "semantic-ui-react";
+import { Button, Item, Label, Modal, Grid } from "semantic-ui-react";
 
 export default class DoctorCard extends React.Component {
 	state = {
@@ -16,7 +7,7 @@ export default class DoctorCard extends React.Component {
 	};
 
 	findClosestPractice = () => {
-		this.props.dr.practices.map(practice => {
+		this.props.dr.practices.forEach(practice => {
 			if (practice.distance < this.state.closestPractice.distance) {
 				this.setState({
 					closestPractice: practice
@@ -55,7 +46,7 @@ export default class DoctorCard extends React.Component {
 		if (this.props.dr.ratings.length) {
 			this.props.dr.ratings.forEach(rating => {
 				if (rating.provider === "betterdoctor") {
-					ratingImg = <img src={rating.image_url_small} />;
+					ratingImg = <img src={rating.image_url_small} alt={this.props.dr.profile.slug} />;
 				}
 			});
 		}
@@ -81,6 +72,7 @@ export default class DoctorCard extends React.Component {
 									src={rating.provider_url}
 									width="1025"
 									height="576.56"
+									title={`${this.props.profile.slug}-yelp`}
 								/>
 							</Modal.Description>
 						</Modal.Content>
@@ -93,11 +85,13 @@ export default class DoctorCard extends React.Component {
 	};
 
 	render() {
+		console.log(this.props.dr)
 		this.findClosestPractice();
 		return (
 			<Item>
 				<Item.Image
 					src={this.props.dr.profile.image_url}
+					alt={this.props.dr.profile.slug}
 					onClick={e => this.props.onClick(this.props.dr)}
 				/>
 			<Item.Content>

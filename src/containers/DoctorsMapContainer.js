@@ -11,7 +11,7 @@ export default class DoctorsMapContainer extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps){
-		if (nextProps.doctors != this.props.doctors){
+		if (nextProps.doctors !== this.props.doctors){
 			this.setState({
 				doctors: nextProps.doctors,
 				location: nextProps.location
