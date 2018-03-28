@@ -1,6 +1,5 @@
 import React from "react";
 import DoctorsMap from "../components/DoctorsMap";
-const apiKey = process.env.apiKey
 
 export default class DoctorsMapContainer extends React.Component {
 
