@@ -9,8 +9,6 @@ import PageHeader from "./components/PageHeader"
 import WelcomeBox from "./components/WelcomeBox"
 import "./App.css"
 
-const apiKey = process.env.apiKey
-
 export default class Home extends React.Component {
 	state = {
 		doctors: [],
