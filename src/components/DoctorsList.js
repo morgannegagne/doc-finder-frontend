@@ -73,7 +73,11 @@ export default class DoctorsList extends React.Component {
 					/>
 				) : (
 					<Segment style={{height: 620, overflow: "scroll"}}>
-						<Item.Group divided>{this.createDoctorCards()}</Item.Group>
+						{this.createDoctorCards().length ?
+							<Item.Group divided>{this.createDoctorCards()}</Item.Group>
+							:
+							<h1 style={{textAlign: "center"}}>No results found. Try different search terms.</h1>
+						}
 					</Segment>
 				)}
 			</div>
