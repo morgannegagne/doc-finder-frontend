@@ -7,7 +7,7 @@ Users can search for physicians either using their current location (via [geoloc
 
 **Doc Finder** utilizes the [BetterDoctor API](https://developer.betterdoctor.com/), a nationwide database of physicians, dentists, and eye doctors. API requests are made through a Rails backend.
 
-Production Site: [http://doc-finder.herokuapp.com/]
+Production Site: http://doc-finder.herokuapp.com/
 
 ## Using Google Maps API with React
 
